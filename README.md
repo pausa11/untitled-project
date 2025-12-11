@@ -1,109 +1,68 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# enfoCAR
 
 <p align="center">
- The fastest way to build apps with Next.js and Supabase
+  <strong>Gestión Inteligente de Activos Vehiculares</strong>
 </p>
 
 <p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
+  <a href="#caracter%C3%ADsticas"><strong>Características</strong></a> ·
+  <a href="#tecnolog%C3%ADas"><strong>Tecnologías</strong></a> ·
+  <a href="#instalaci%C3%B3n"><strong>Instalación</strong></a>
 </p>
 <br/>
 
-## Features
+## Descripción
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Proxy
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Password-based authentication block installed via the [Supabase UI Library](https://supabase.com/ui/docs/nextjs/password-based-auth)
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+**enfoCAR** es una solución integral diseñada para la gestión eficiente de flotas de vehículos. Nuestra aplicación permite a los propietarios y administradores llevar un control detallado de sus activos (carros, buses, camiones), monitorear ingresos y gastos, y tomar decisiones informadas gracias a un panel de control intuitivo.
 
-## Demo
+## Características
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+- **Gestión de Activos**: Registro y administración detallada de vehículos, incluyendo metadatos personalizados.
+- **Seguimiento Financiero**: Control preciso de ingresos y egresos por unidad, permitiendo un análisis de rentabilidad claro.
+- **Panel de Control (Dashboard)**: Visualización de métricas clave en tiempo real para una toma de decisiones ágil.
+- **Diseño Mobile-First**: Una experiencia de usuario optimizada para dispositivos móviles, permitiendo la gestión desde cualquier lugar.
+- **Autenticación Segura**: Sistema de login robusto impulsado por Supabase Auth.
+- **Soporte Multilenguaje**: Aplicación totalmente en español.
 
-## Deploy to Vercel
+## Tecnologías
 
-Vercel deployment will guide you through creating a Supabase account and project.
+Este proyecto está construido con un stack moderno y eficiente:
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+- **[Next.js](https://nextjs.org)**: Framework de React para producción (App Router).
+- **[Supabase](https://supabase.com)**: Backend as a Service (Auth, Database).
+- **[Prisma](https://www.prisma.io)**: ORM de nueva generación para Node.js y TypeScript.
+- **[Tailwind CSS](https://tailwindcss.com)**: Framework de utilidades CSS para un diseño rápido y flexible.
+- **[shadcn/ui](https://ui.shadcn.com/)**: Componentes de UI reutilizables y accesibles.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+## Instalación
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+Para ejecutar el proyecto localmente:
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+1.  **Clonar el repositorio**:
+    ```bash
+    git clone <tu-repositorio-url>
+    cd <nombre-del-directorio>
+    ```
 
-## Clone and run locally
+2.  **Instalar dependencias**:
+    ```bash
+    npm install
+    ```
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+3.  **Configurar variables de entorno**:
+    Renombra `.env.example` a `.env.local` y añade tus credenciales de Supabase:
+    ```env
+    NEXT_PUBLIC_SUPABASE_URL=[TU_URL_DE_SUPABASE]
+    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=[TU_LLAVE_PUBLICA_DE_SUPABASE]
+    ```
 
-2. Create a Next.js app using the Supabase Starter template npx command
+4.  **Ejecutar el servidor de desarrollo**:
+    ```bash
+    npm run dev
+    ```
 
-   ```bash
-   npx create-next-app --example with-supabase with-supabase-app
-   ```
+    La aplicación estará disponible en [http://localhost:3000](http://localhost:3000).
 
-   ```bash
-   yarn create next-app --example with-supabase with-supabase-app
-   ```
+## Licencia
 
-   ```bash
-   pnpm create next-app --example with-supabase with-supabase-app
-   ```
-
-3. Use `cd` to change into the app's directory
-
-   ```bash
-   cd with-supabase-app
-   ```
-
-4. Rename `.env.example` to `.env.local` and update the following:
-
-  ```env
-  NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=[INSERT SUPABASE PROJECT API PUBLISHABLE OR ANON KEY]
-  ```
-  > [!NOTE]
-  > This example uses `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, which refers to Supabase's new **publishable** key format.
-  > Both legacy **anon** keys and new **publishable** keys can be used with this variable name during the transition period. Supabase's dashboard may show `NEXT_PUBLIC_SUPABASE_ANON_KEY`; its value can be used in this example.
-  > See the [full announcement](https://github.com/orgs/supabase/discussions/29260) for more information.
-
-  Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` can be found in [your Supabase project's API settings](https://supabase.com/dashboard/project/_?showConnect=true)
-
-5. You can now run the Next.js local development server:
-
-   ```bash
-   npm run dev
-   ```
-
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
-
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
-
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
-
-## Feedback and issues
-
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
-
-## More Supabase examples
-
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+Este proyecto es propiedad privada y está destinado para uso interno.
