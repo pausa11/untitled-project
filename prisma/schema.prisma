@@ -3,13 +3,47 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   email     String   @unique
   createdAt DateTime @default(now())
+  assets    Asset[]
+}
+
+model Asset {
+  id               String            @id @default(uuid())
+  name             String
+  type             AssetType
+  customAttributes Json?
+  userId           String
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  financialRecords FinancialRecord[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model FinancialRecord {
+  id          String              @id @default(uuid())
+  amount      Decimal             @db.Decimal(10, 2)
+  type        FinancialRecordType
+  date        DateTime            @default(now())
+  description String?
+  assetId     String
+  asset       Asset               @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+enum AssetType {
+  CAR
+  BUS
+  TRUCK
+}
+
+enum FinancialRecordType {
+  INCOME
+  EXPENSE
 }
