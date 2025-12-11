@@ -62,7 +62,7 @@ export default async function ProtectedPage() {
   const sortedMonths = Object.keys(monthlyStats).sort();
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-6 sm:gap-8 p-3 sm:p-4 md:p-6">
+    <div className="flex-1 w-full flex flex-col gap-6 sm:gap-8 p-8 sm:p-12 md:p-16">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl sm:text-3xl font-bold">Panel de Control</h1>
