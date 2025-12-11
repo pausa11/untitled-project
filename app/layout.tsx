@@ -4,10 +4,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Sidebar } from "@/components/sidebar";
 
-
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
@@ -15,18 +12,13 @@ export const metadata: Metadata = {
   description: "Asset management application",
 };
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   display: "swap",
   subsets: ["latin"],
 });
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.className} antialiased`}>
@@ -36,9 +28,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen">
+          <div id="root" className="flex min-h-screen">
             <Sidebar />
-            <main className="flex-1 overflow-auto">
+            <main id="main" className="flex-1 overflow-auto">
               {children}
             </main>
           </div>

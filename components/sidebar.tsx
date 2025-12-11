@@ -6,15 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { AuthButton } from "@/components/auth-button";
-import {
-    Home,
-    LayoutDashboard,
-    Package,
-    Menu,
-    X,
-    ChevronLeft,
-    ChevronRight,
-} from "lucide-react";
+import { Home, LayoutDashboard, Package, Menu, X, ChevronLeft, ChevronRight, } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigationItems = [
@@ -45,17 +37,10 @@ export function Sidebar() {
 
     return (
         <>
-            {/* Mobile Menu Button */}
-            <Button
-                variant="ghost"
-                size="icon"
-                className="fixed top-4 left-4 z-50 lg:hidden"
-                onClick={toggleMobileSidebar}
-            >
+            <Button id="sidebar-toggle" variant="ghost" size="icon" className="fixed top-4 left-4 z-50 lg:hidden" onClick={toggleMobileSidebar} >
                 {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
             </Button>
 
-            {/* Mobile Overlay */}
             {isMobileOpen && (
                 <div
                     className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -63,18 +48,9 @@ export function Sidebar() {
                 />
             )}
 
-            {/* Sidebar */}
-            <aside
-                className={cn(
-                    "fixed left-0 top-0 z-40 h-screen bg-background border-r border-border transition-all duration-300 flex flex-col",
-                    isExpanded ? "w-64" : "w-16",
-                    // Mobile and desktop visibility
-                    "translate-x-0 max-lg:-translate-x-full",
-                    isMobileOpen && "max-lg:translate-x-0"
-                )}
-            >
-                {/* Header */}
-                <div className="h-16 flex items-center justify-between px-4 border-b border-border">
+            <aside id="sidebar" className={cn( "fixed left-0 top-0 z-40 h-screen bg-background border-r border-border transition-all duration-300 flex flex-col", isExpanded ? "w-64" : "w-16", "translate-x-0 max-lg:-translate-x-full", isMobileOpen && "max-lg:translate-x-0" )} >
+                
+                <div id="sidebar-header" className="h-16 flex items-center justify-between px-4 border-b border-border">
                     {isExpanded && (
                         <Link href="/" className="text-xl font-bold">
                             enfoCAR
@@ -90,8 +66,7 @@ export function Sidebar() {
                     </Button>
                 </div>
 
-                {/* Navigation */}
-                <nav className="flex-1 overflow-y-auto py-4">
+                <nav id="sidebar-nav" className="flex-1 overflow-y-auto py-4">
                     <ul className="space-y-2 px-2">
                         {navigationItems.map((item) => {
                             const Icon = item.icon;
@@ -119,28 +94,19 @@ export function Sidebar() {
                     </ul>
                 </nav>
 
-                {/* Footer */}
-                <div className="border-t border-border p-4 space-y-4">
-                    {/* Theme Switcher */}
+                <div id="sidebar-footer" className="border-t border-border p-4 space-y-4">
                     <div className={cn("flex items-center", !isExpanded && "justify-center")}>
                         <ThemeSwitcher />
                         {isExpanded && <span className="ml-2 text-sm text-muted-foreground">Tema</span>}
                     </div>
-
-                    {/* Auth Button */}
                     <div className={cn(!isExpanded && "flex justify-center")}>
                         <AuthButton />
                     </div>
                 </div>
+
             </aside>
 
-            {/* Spacer for content */}
-            <div
-                className={cn(
-                    "transition-all duration-300 hidden lg:block",
-                    isExpanded ? "w-64" : "w-16"
-                )}
-            />
+            <div id="sidebar-spacer" className={cn( "transition-all duration-300 hidden lg:block", isExpanded ? "w-64" : "w-16" )} />
         </>
     );
 }
