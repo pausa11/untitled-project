@@ -30,13 +30,6 @@ export const metadata: Metadata = {
     description: "Aplicación moderna para gestión de activos vehiculares",
   },
   manifest: "/manifest.json",
-  themeColor: "#4A90E2",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
   icons: {
     icon: [
       { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -49,6 +42,14 @@ export const metadata: Metadata = {
       { url: "/icons/apple-touch-icon-167x167.png", sizes: "167x167", type: "image/png" },
     ],
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#4A90E2",
 };
 
 const geistSans = Geist({

@@ -52,10 +52,11 @@ export async function POST(request: Request) {
             );
         }
 
-        // Ensure user exists in database (upsert)
+        // Ensure user exists in database with correct Supabase ID
         await prisma.user.upsert({
             where: { id: user.id },
             update: {
+                // Update email if it changed
                 email: user.email || "",
             },
             create: {
