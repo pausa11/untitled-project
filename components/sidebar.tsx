@@ -56,11 +56,11 @@ export function Sidebar() {
                 />
             )}
 
-            <aside id="sidebar" className={cn("fixed left-0 top-0 z-40 h-screen bg-background border-r border-border transition-all duration-300 flex flex-col", isExpanded ? "w-64" : "w-16", "translate-x-0 max-lg:-translate-x-full", isMobileOpen && "max-lg:translate-x-0")} >
+            <aside id="sidebar" className={cn("fixed left-0 top-0 z-40 h-screen bg-primary text-primary-foreground border-r border-primary/20 transition-all duration-300 flex flex-col", isExpanded ? "w-64" : "w-16", "translate-x-0 max-lg:-translate-x-full", isMobileOpen && "max-lg:translate-x-0")} >
 
-                <div id="sidebar-header" className="h-16 flex items-center justify-between px-4 border-b border-border">
+                <div id="sidebar-header" className="h-16 flex items-center justify-between px-4 border-b border-primary-foreground/10">
                     {isExpanded && (
-                        <Link href="/" className="text-xl font-bold">
+                        <Link href="/" className="text-xl font-bold text-primary-foreground hover:text-white transition-colors">
                             enfoCAR
                         </Link>
                     )}
@@ -70,7 +70,7 @@ export function Sidebar() {
                         onClick={isMobileOpen ? toggleMobileSidebar : toggleSidebar}
                         className={cn(
                             isMobileOpen ? "lg:hidden" : "hidden lg:flex",
-                            "ml-auto"
+                            "ml-auto text-primary-foreground hover:text-white hover:bg-primary-foreground/10"
                         )}
                     >
                         {isMobileOpen ? <X size={24} /> : isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
@@ -91,8 +91,8 @@ export function Sidebar() {
                                         className={cn(
                                             "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors",
                                             isActive
-                                                ? "bg-primary text-primary-foreground"
-                                                : "hover:bg-muted text-muted-foreground hover:text-foreground",
+                                                ? "bg-white/20 text-white font-semibold border-l-4 border-white ml-[-4px] pl-[12px]"
+                                                : "text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
                                             !isExpanded && "justify-center"
                                         )}
                                     >
@@ -105,10 +105,10 @@ export function Sidebar() {
                     </ul>
                 </nav>
 
-                <div id="sidebar-footer" className="border-t border-border p-4 space-y-4">
+                <div id="sidebar-footer" className="border-t border-primary-foreground/10 p-4 space-y-4">
                     <div className={cn("flex items-center", !isExpanded && "justify-center")}>
                         <ThemeSwitcher />
-                        {isExpanded && <span className="ml-2 text-sm text-muted-foreground">Tema</span>}
+                        {isExpanded && <span className="ml-2 text-sm text-primary-foreground/70">Tema</span>}
                     </div>
                     <div className={cn(!isExpanded && "flex justify-center")}>
                         <AuthButton />

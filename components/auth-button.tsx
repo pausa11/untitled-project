@@ -40,10 +40,10 @@ export function AuthButton() {
     </div>
   ) : (
     <div className="flex gap-2">
-      <Button asChild size="sm" variant={"outline"}>
+      <Button asChild size="sm" variant={"outline"} className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-white">
         <Link href="/auth/login">Iniciar Sesión</Link>
       </Button>
-      <Button asChild size="sm" variant={"default"}>
+      <Button asChild size="sm" className="bg-white/20 hover:bg-white/30 text-white border border-white/30">
         <Link href="/auth/sign-up">Registrarse</Link>
       </Button>
     </div>
