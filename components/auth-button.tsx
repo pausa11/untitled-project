@@ -6,8 +6,13 @@ import { createClient } from "@/lib/supabase/client";
 import { LogoutButton } from "./logout-button";
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
+import { LogIn, UserPlus } from "lucide-react";
 
-export function AuthButton() {
+interface AuthButtonProps {
+  isExpanded?: boolean;
+}
+
+export function AuthButton({ isExpanded = true }: AuthButtonProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
@@ -36,15 +41,30 @@ export function AuthButton() {
 
   return user ? (
     <div className="flex items-center w-full flex-col">
-      <LogoutButton />
+      <LogoutButton isExpanded={isExpanded} />
     </div>
   ) : (
-    <div className="flex gap-2">
-      <Button asChild size="sm" variant={"outline"} className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-white">
-        <Link href="/auth/login">Iniciar Sesión</Link>
+    <div className={`flex ${isExpanded ? 'gap-2' : 'flex-col gap-2'}`}>
+      <Button
+        asChild
+        size={isExpanded ? "sm" : "icon"}
+        variant={"outline"}
+        className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-white"
+        title={!isExpanded ? "Iniciar Sesión" : undefined}
+      >
+        <Link href="/auth/login">
+          {isExpanded ? "Iniciar Sesión" : <LogIn size={20} />}
+        </Link>
       </Button>
-      <Button asChild size="sm" className="bg-white/20 hover:bg-white/30 text-white border border-white/30">
-        <Link href="/auth/sign-up">Registrarse</Link>
+      <Button
+        asChild
+        size={isExpanded ? "sm" : "icon"}
+        className="bg-white/20 hover:bg-white/30 text-white border border-white/30"
+        title={!isExpanded ? "Registrarse" : undefined}
+      >
+        <Link href="/auth/sign-up">
+          {isExpanded ? "Registrarse" : <UserPlus size={20} />}
+        </Link>
       </Button>
     </div>
   );

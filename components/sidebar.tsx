@@ -111,7 +111,7 @@ export function Sidebar() {
                         {isExpanded && <span className="ml-2 text-sm text-primary-foreground/70">Tema</span>}
                     </div>
                     <div className={cn(!isExpanded && "flex justify-center")}>
-                        <AuthButton />
+                        <AuthButton isExpanded={isExpanded} />
                     </div>
                 </div>
 
