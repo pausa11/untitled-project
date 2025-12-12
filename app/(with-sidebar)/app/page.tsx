@@ -21,16 +21,26 @@ export default async function ProtectedPage() {
   }
 
   // Ensure user exists in Prisma database (important for OAuth users)
-  await prisma.user.upsert({
-    where: { id: user.id },
-    update: {
-      email: user.email || "",
-    },
-    create: {
-      id: user.id,
-      email: user.email || "",
-    },
+  const existingUser = await prisma.user.findUnique({
+    where: { id: user.id }
   });
+
+  if (!existingUser) {
+    // Only create if user doesn't exist by ID
+    // If email already exists, it means user has multiple auth methods
+    try {
+      await prisma.user.create({
+        data: {
+          id: user.id,
+          email: user.email || "",
+        },
+      });
+    } catch (error) {
+      // If email already exists, that's okay - user might have signed up
+      // with email/password and is now using Google OAuth
+      console.log("User creation skipped - email may already exist with different auth method");
+    }
+  }
 
   // Fetch data
   const assetCount = await prisma.asset.count({

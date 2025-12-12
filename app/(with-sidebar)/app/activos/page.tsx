@@ -20,16 +20,24 @@ export default async function AssetsPage() {
     }
 
     // Ensure user exists in Prisma database (important for OAuth users)
-    await prisma.user.upsert({
-        where: { id: user.id },
-        update: {
-            email: user.email || "",
-        },
-        create: {
-            id: user.id,
-            email: user.email || "",
-        },
+    const existingUser = await prisma.user.findUnique({
+        where: { id: user.id }
     });
+
+    if (!existingUser) {
+        // Only create if user doesn't exist by ID
+        try {
+            await prisma.user.create({
+                data: {
+                    id: user.id,
+                    email: user.email || "",
+                },
+            });
+        } catch (error) {
+            // If email already exists, that's okay
+            console.log("User creation skipped - email may already exist with different auth method");
+        }
+    }
 
     // Fetch all assets for the user
     const assets = await prisma.asset.findMany({
