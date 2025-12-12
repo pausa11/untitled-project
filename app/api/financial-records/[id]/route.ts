@@ -4,8 +4,9 @@ import { NextResponse } from "next/server";
 
 export async function PUT(
     request: Request,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
+    const params = await props.params;
     try {
         // Verify authentication
         const supabase = await createClient();
@@ -95,8 +96,9 @@ export async function PUT(
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
+    const params = await props.params;
     try {
         // Verify authentication
         const supabase = await createClient();
