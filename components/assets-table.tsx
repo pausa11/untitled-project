@@ -38,7 +38,7 @@ export function AssetsTable({ assets }: AssetsTableProps) {
                     <table className="w-full min-w-[600px]">
                         <thead className="bg-muted/50 border-b">
                             <tr>
-                                <th className="text-left p-3 sm:p-4 font-medium text-sm">Nombre</th>
+                                <th className="text-left p-3 sm:p-4 font-medium text-sm">Activo</th>
                                 <th className="text-left p-3 sm:p-4 font-medium text-sm">Tipo</th>
                                 <th className="text-left p-3 sm:p-4 font-medium text-sm">Detalles</th>
                                 <th className="text-left p-3 sm:p-4 font-medium text-sm">Fecha de Creación</th>
@@ -51,7 +51,24 @@ export function AssetsTable({ assets }: AssetsTableProps) {
                                 return (
                                     <tr key={asset.id} className="border-b last:border-0 hover:bg-muted/10 transition-colors">
                                         <td className="p-3 sm:p-4">
-                                            <div className="font-medium">{asset.name}</div>
+                                            <div className="flex items-center gap-3">
+                                                {/* @ts-ignore - imageUrl exists after migration */}
+                                                {asset.imageUrl ? (
+                                                    <div className="h-10 w-10 relative rounded-md overflow-hidden bg-muted">
+                                                        <img
+                                                            /* @ts-ignore */
+                                                            src={asset.imageUrl}
+                                                            alt={asset.name}
+                                                            className="h-full w-full object-cover"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="h-10 w-10 rounded-md bg-muted flex items-center justify-center text-muted-foreground">
+                                                        <span className="text-xs uppercase">{asset.name.substring(0, 2)}</span>
+                                                    </div>
+                                                )}
+                                                <div className="font-medium">{asset.name}</div>
+                                            </div>
                                         </td>
                                         <td className="p-3 sm:p-4">
                                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">

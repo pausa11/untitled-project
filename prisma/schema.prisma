@@ -4,7 +4,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -24,6 +25,7 @@ model Asset {
   financialRecords FinancialRecord[]
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
+  imageUrl         String?
 }
 
 model FinancialRecord {

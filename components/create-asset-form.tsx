@@ -21,10 +21,13 @@ const VEHICLE_TYPES = [
     { value: "TURBO", label: "Turbo" },
 ];
 
+import { createClient } from "@/lib/supabase/client";
+
 export function CreateAssetForm() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [imageFile, setImageFile] = useState<File | null>(null);
 
     // Required fields
     const [name, setName] = useState("");
@@ -50,6 +53,29 @@ export function CreateAssetForm() {
         setLoading(true);
 
         try {
+            let imageUrl = null;
+
+            if (imageFile) {
+                const supabase = createClient();
+                const { data: { user } } = await supabase.auth.getUser();
+
+                if (!user) throw new Error("No autenticado");
+
+                const fileExt = imageFile.name.split(".").pop();
+                const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+
+                const { error: uploadError } = await supabase.storage
+                    .from("assets")
+                    .upload(fileName, imageFile);
+
+                if (uploadError) throw uploadError;
+
+                const { data: { publicUrl } } = supabase.storage
+                    .from("assets")
+                    .getPublicUrl(fileName);
+
+                imageUrl = publicUrl;
+            }
             // Build custom attributes object
             const customAttributes: Record<string, string> = {};
             if (marca) customAttributes.marca = marca;
@@ -67,6 +93,7 @@ export function CreateAssetForm() {
                 body: JSON.stringify({
                     name,
                     type,
+                    imageUrl,
                     customAttributes: Object.keys(customAttributes).length > 0 ? customAttributes : null,
                 }),
             });
@@ -109,6 +136,22 @@ export function CreateAssetForm() {
                                 onChange={(e) => setName(e.target.value)}
                                 required
                             />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="image">Imagen del Activo</Label>
+                            <Input
+                                id="image"
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) setImageFile(file);
+                                }}
+                            />
+                            <p className="text-xs text-muted-foreground">
+                                Sube una foto de tu nave para identificarla mejor.
+                            </p>
                         </div>
 
                         <div className="grid gap-2">
