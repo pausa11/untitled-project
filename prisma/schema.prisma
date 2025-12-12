@@ -33,6 +33,7 @@ model FinancialRecord {
   amount      Decimal             @db.Decimal(10, 2)
   type        FinancialRecordType
   date        DateTime            @default(now())
+  endDate     DateTime?
   description String?
   assetId     String
   asset       Asset               @relation(fields: [assetId], references: [id], onDelete: Cascade)

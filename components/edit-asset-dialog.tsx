@@ -52,6 +52,7 @@ export function EditAssetDialog({ asset, open, onOpenChange }: EditAssetDialogPr
     const [año, setAño] = useState(customAttrs.año || "");
     const [placa, setPlaca] = useState(customAttrs.placa || "");
     const [kilometraje, setKilometraje] = useState(customAttrs.kilometraje || "");
+    const [conductor, setConductor] = useState(customAttrs.conductor || "");
 
     // Reset form when asset changes
     useEffect(() => {
@@ -64,6 +65,7 @@ export function EditAssetDialog({ asset, open, onOpenChange }: EditAssetDialogPr
         setAño(attrs.año || "");
         setPlaca(attrs.placa || "");
         setKilometraje(attrs.kilometraje || "");
+        setConductor(attrs.conductor || "");
         setError("");
     }, [asset]);
 
@@ -87,6 +89,7 @@ export function EditAssetDialog({ asset, open, onOpenChange }: EditAssetDialogPr
             if (año) customAttributes.año = año;
             if (placa) customAttributes.placa = placa;
             if (kilometraje) customAttributes.kilometraje = kilometraje;
+            if (conductor) customAttributes.conductor = conductor;
 
             const response = await fetch(`/api/assets/${asset.id}`, {
                 method: "PUT",
@@ -223,6 +226,16 @@ export function EditAssetDialog({ asset, open, onOpenChange }: EditAssetDialogPr
                                         placeholder="Ej: 50000"
                                         value={kilometraje}
                                         onChange={(e) => setKilometraje(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="grid gap-2">
+                                    <Label htmlFor="edit-conductor">Conductor</Label>
+                                    <Input
+                                        id="edit-conductor"
+                                        placeholder="Ej: Juan Pérez"
+                                        value={conductor}
+                                        onChange={(e) => setConductor(e.target.value)}
                                     />
                                 </div>
                             </div>

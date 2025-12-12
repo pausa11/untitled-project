@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { EditAssetDialog } from "@/components/edit-asset-dialog"
 import { DeleteAssetDialog } from "@/components/delete-asset-dialog"
 import { useState } from "react";
+import Link from "next/link";
 
 interface AssetsTableProps {
     assets: Asset[];
@@ -129,10 +130,26 @@ export function AssetsTable({ assets }: AssetsTableProps) {
                                                 <span>{customAttrs.kilometraje} km</span>
                                             </div>
                                         )}
+                                        {customAttrs.conductor && (
+                                            <div className="flex justify-between">
+                                                <span className="font-medium text-foreground">Conductor:</span>
+                                                <span>{customAttrs.conductor}</span>
+                                            </div>
+                                        )}
                                     </div>
                                 ) : (
                                     <p className="text-sm text-muted-foreground italic">Sin detalles adicionales</p>
                                 )}
+
+                                {/* Financial Quick Summary - Will be populated via client component */}
+                                <div className="pt-2 border-t">
+                                    <Link href={`/app/activos/${asset.id}`}>
+                                        <Button variant="outline" size="sm" className="w-full gap-2">
+                                            <span>Ver Finanzas</span>
+                                            <span className="text-xs">💰</span>
+                                        </Button>
+                                    </Link>
+                                </div>
 
                                 {/* Creation Date */}
                                 <div className="pt-2 border-t text-xs text-muted-foreground">
