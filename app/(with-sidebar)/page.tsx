@@ -1,10 +1,18 @@
-import { Hero } from "@/components/hero";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <div className="flex-1 flex flex-col p-5 h-full">
-      <Hero />
-    </div>
-  );
+export default async function Home() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Redirect based on authentication status
+  if (user) {
+    redirect("/app");
+  } else {
+    redirect("/auth/login");
+  }
 }
 
